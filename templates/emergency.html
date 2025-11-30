@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="section-title text-danger">
+                🚨 Emergency Room (ER) Live Status
+            </h2>
+            <p class="text-muted">
+                Real-time triage list based on patient severity (Priority Queue).
+            </p>
+        </div>
+        
+        <div class="card shadow-sm" style="min-width: 200px;">
+            <div class="card-body text-center p-3">
+                <h6 class="text-uppercase text-muted mb-1" style="font-size: 0.8rem; font-weight: 700;">Waiting Patients</h6>
+                <h2 class="mb-0 text-danger" style="font-weight: 700;">{{ data|length }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" style="border-bottom: 2px solid var(--danger);">
+            <span style="color: var(--danger);">🔥 Critical Priority List</span>
+            <small class="text-muted">Sorted by Severity (1 = Highest)</small>
+        </div>
+        
+        <div class="card-body p-0">
+            {% if not data %}
+                <div class="text-center p-5">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">✅</div>
+                    <h4 class="text-success">All Clear!</h4>
+                    <p class="text-muted">No emergency patients in the queue right now.</p>
+                </div>
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th width="10%">Token ID</th>
+                                <th width="20%">Patient Name</th>
+                                <th width="15%">Age / Spec</th>
+                                <th width="20%">Condition</th>
+                                <th width="15%">Severity</th>
+                                <th width="20%">Triage Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in data %}
+                            <tr class="{% if p.priority <= 2 %}bg-light-danger{% endif %}">
+                                <td>
+                                    <strong>#{{ p.id }}</strong>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 600; color: var(--text-dark);">
+                                        {{ p.name }}
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ p.age }} Yrs / {{ p.specialization }}
+                                </td>
+                                <td>
+                                    <span style="font-weight: 500;">{{ p.disease }}</span>
+                                </td>
+                                <td>
+                                    {% if p.priority <= 2 %}
+                                        <span class="badge badge-emergency">
+                                            ⚠️ CRITICAL ({{ p.priority }})
+                                        </span>
+                                    {% elif p.priority == 3 %}
+                                        <span class="badge" style="background-color: var(--warning); color: #fff;">
+                                            ⚠️ URGENT ({{ p.priority }})
+                                        </span>
+                                    {% else %}
+                                        <span class="badge badge-specialist">
+                                            STABLE ({{ p.priority }})
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="text-muted" style="font-size: 0.9rem;">
+                                        ⏱ {{ p.created_at.strftime('%H:%M:%S') }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

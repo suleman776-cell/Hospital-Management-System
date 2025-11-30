@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="section-title"><i class="fas fa-clock me-2"></i> Appointments Queue (FIFO)</h2>
+    
+    <div class="card">
+        <div class="card-header">
+            <span>Current Waiting List</span>
+            <span class="badge badge-normal">{{ appointments|length }} Patients</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th width="10%">Token #</th>
+                            <th width="25%">Patient</th>
+                            <th width="25%">Doctor</th>
+                            <th width="20%">Scheduled Time</th>
+                            <th width="20%">Time Booked</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appt in appointments %}
+                        <tr>
+                            <td>#{{ appt.appointment_id }}</td>
+                            <td>{{ appt.patient_name }} (PID: {{ appt.pid }})</td>
+                            <td>{{ appt.doctor_name }} (DID: {{ appt.doctor_id }})</td>
+                            <td><span class="badge badge-primary">{{ appt.time }}</span></td>
+                            <td><small class="text-muted">{{ appt.created_at.strftime('%Y-%m-%d %H:%M') }}</small></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center p-4 text-muted">No appointments in the queue.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

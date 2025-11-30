@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title"><i class="fas fa-chart-line me-2"></i> Admin System Dashboard</h2>
+        <a href="/logout" class="btn btn-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+    </div>
+
+    <ul class="nav nav-tabs mb-3" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="patients-tab" data-bs-toggle="tab" data-bs-target="#patients" type="button" role="tab" aria-controls="patients" aria-selected="true">Patients (BST)</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="doctors-tab" data-bs-toggle="tab" data-bs-target="#doctors" type="button" role="tab" aria-controls="doctors" aria-selected="false">Doctors (MAP)</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="appointments-tab" data-bs-toggle="tab" data-bs-target="#appointments" type="button" role="tab" aria-controls="appointments" aria-selected="false">Appointments (QUEUE)</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="bills-tab" data-bs-toggle="tab" data-bs-target="#bills" type="button" role="tab" aria-controls="bills" aria-selected="false">Bills (STACK)</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="emergency-tab" data-bs-toggle="tab" data-bs-target="#emergency" type="button" role="tab" aria-controls="emergency" aria-selected="false">Emergency (HEAP)</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="adminTabsContent">
+        
+        <div class="tab-pane fade show active" id="patients" role="tabpanel" aria-labelledby="patients-tab">
+            <div class="card p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Disease</th><th>Specialization</th><th>Priority</th></tr></thead>
+                        <tbody>
+                            {% for p in patients %}
+                            <tr>
+                                <td>{{ p.id }}</td>
+                                <td>{{ p.name }}</td>
+                                <td>{{ p.age }}</td>
+                                <td>{{ p.disease }}</td>
+                                <td><span class="badge badge-specialist">{{ p.specialization }}</span></td>
+                                <td><span class="badge {% if p.priority <= 3 %}badge-emergency{% else %}badge-normal{% endif %}">{{ p.priority }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="doctors" role="tabpanel" aria-labelledby="doctors-tab">
+            <div class="card p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>ID</th><th>Name</th><th>Specialization</th></tr></thead>
+                        <tbody>
+                            {% for d in doctors %}
+                            <tr><td>{{ d.id }}</td><td>{{ d.name }}</td><td><span class="badge badge-specialist">{{ d.specialization }}</span></td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-pane fade" id="appointments" role="tabpanel" aria-labelledby="appointments-tab">
+            <div class="card p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Appt ID</th><th>Patient ID</th><th>Patient Name</th><th>Doctor Name</th><th>Time</th></tr></thead>
+                        <tbody>
+                            {% for a in appointments %}
+                            <tr>
+                                <td>{{ a.appointment_id }}</td>
+                                <td>{{ a.pid }}</td>
+                                <td>{{ a.patient_name }}</td>
+                                <td>{{ a.doctor_name }}</td>
+                                <td>{{ a.time }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="bills" role="tabpanel" aria-labelledby="bills-tab">
+            <div class="card p-0">
+                <ul class="list-group list-group-flush">
+                    {% for b in bills %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                             <i class="fas fa-file-invoice-dollar me-2 text-primary"></i> {{ b }}
+                             {% if loop.index == 1 %}
+                                <span class="badge bg-danger">STACK TOP</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="emergency" role="tabpanel" aria-labelledby="emergency-tab">
+            <div class="card p-0">
+                <ul class="list-group list-group-flush">
+                    {% for e in emergency %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-3 {% if e.priority <= 2 %}bg-light-danger{% endif %}">
+                            <i class="fas fa-exclamation-triangle me-2 text-danger"></i> 
+                            {{ e.name }} (ID: {{ e.id }}) - {{ e.disease }}
+                            <span class="badge badge-emergency">Priority: {{ e.priority }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

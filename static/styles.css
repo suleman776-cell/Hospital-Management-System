@@ -1,0 +1,294 @@
+/* -----------------------------------------------------------
+   GOOGLE FONTS IMPORT
+----------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* -----------------------------------------------------------
+   VARIABLES & THEME CONFIGURATION
+----------------------------------------------------------- */
+:root {
+    --primary-color: #0e6cc4;       /* Trustworthy Medical Blue */
+    --primary-dark: #084d8d;        /* Darker Blue for Hovers */
+    --accent-color: #00d2d3;        /* Cyan for Highlights */
+    --bg-color: #f4f7f6;            /* Light Greyish Blue Background */
+    --text-dark: #2d3436;           /* Soft Black for Headings */
+    --text-light: #636e72;          /* Grey for paragraphs */
+    --white: #ffffff;
+    --danger: #ff6b6b;              /* Soft Red for Emergency */
+    --success: #1dd1a1;             /* Green for Success */
+    --warning: #feca57;             /* Yellow for Alerts */
+    --info: #00bcd4;                /* Cyan for info */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 20px rgba(14, 108, 196, 0.15);
+    --radius: 12px;
+}
+
+/* -----------------------------------------------------------
+   GLOBAL RESET
+----------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    margin: 0;
+    padding-bottom: 60px;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* -----------------------------------------------------------
+   MODERN NAVBAR
+----------------------------------------------------------- */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(14, 108, 196, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: var(--white) !important;
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    padding: 8px 15px !important;
+}
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white) !important;
+    transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------
+   CARDS (DASHBOARD STYLE)
+----------------------------------------------------------- */
+.card {
+    background: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-header {
+    background-color: var(--white);
+    border-bottom: 2px solid #eef2f7;
+    padding: 15px 25px;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body {
+    padding: 25px;
+    color: var(--text-light);
+}
+
+/* -----------------------------------------------------------
+   FORMS & INPUTS
+----------------------------------------------------------- */
+.form-label {
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    border: 2px solid #eef2f7;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    background-color: #fafbfc;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(14, 108, 196, 0.1);
+    outline: none;
+}
+
+/* -----------------------------------------------------------
+   BUTTONS
+----------------------------------------------------------- */
+.btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(14, 108, 196, 0.3);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(14, 108, 196, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: var(--success);
+    box-shadow: 0 4px 15px rgba(29, 209, 161, 0.3);
+}
+
+.btn-danger {
+    background: var(--danger);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-secondary {
+    background: #bdc3c7;
+    color: var(--text-dark);
+}
+
+/* -----------------------------------------------------------
+   TABLES
+----------------------------------------------------------- */
+.table-responsive {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    background: var(--white);
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 15px;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.table tbody tr {
+    transition: background 0.2s;
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--text-dark);
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fbff;
+}
+
+/* -----------------------------------------------------------
+   BADGES & UTILITIES
+----------------------------------------------------------- */
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge-emergency {
+    background-color: rgba(255, 107, 107, 0.15);
+    color: var(--danger);
+}
+
+.badge-normal {
+    background-color: rgba(29, 209, 161, 0.15);
+    color: var(--success);
+}
+
+.badge-specialist {
+    background-color: rgba(14, 108, 196, 0.1);
+    color: var(--primary-color);
+}
+
+.section-title {
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 5px;
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Flash Messages */
+.alert {
+    border-radius: var(--radius);
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid;
+    font-weight: 500;
+    box-shadow: var(--shadow-soft);
+}
+.alert-success { background-color: #e6fff7; color: #0c8f6a; border-color: var(--success); }
+.alert-danger { background-color: #fff0f0; color: #c0392b; border-color: var(--danger); }
+.alert-warning { background-color: #fffbe6; color: #b78c00; border-color: var(--warning); }
+.alert-info { background-color: #e0f7fa; color: #008ba3; border-color: var(--info); }
+
+.bg-light-danger {
+    background-color: rgba(255, 107, 107, 0.05) !important;
+}
+.bg-light-danger:hover {
+    background-color: rgba(255, 107, 107, 0.1) !important;
+}
